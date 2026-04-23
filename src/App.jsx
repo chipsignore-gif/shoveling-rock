@@ -364,12 +364,112 @@ const CSS = `
   }
 
   /* MOBILE */
+  /* ── HAMBURGER + MOBILE MENU ── */
+  .nav-hamburger {
+    display: none;
+    background: none; border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: var(--ink);
+    align-items: center;
+  }
+  .nav-hamburger svg { display: block; }
+
+  .nav-overlay {
+    position: fixed; inset: 0;
+    z-index: 200;
+    background: #f4f0eb;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    animation: fadeIn 0.2s ease both;
+  }
+  .nav-overlay-close {
+    position: absolute; top: 12px; right: 16px;
+    background: none; border: none;
+    padding: 12px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .nav-overlay-close svg { display: block; }
+  .nav-overlay-links {
+    display: flex; flex-direction: column;
+    gap: 8px; align-items: center;
+  }
+  .nav-overlay-link {
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 0.18em;
+    padding-right: 0.18em;
+    text-transform: uppercase;
+    color: rgba(22,20,15,0.5);
+    background: none; border: none;
+    padding: 14px 24px;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .nav-overlay-link.active,
+  .nav-overlay-link:hover { color: var(--ink); }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
   @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .nav-links { gap: 24px; }
-    .about-wrap { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px 80px; }
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: inline-flex; }
+
+    .about-wrap { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 60px; }
     .about-photo { aspect-ratio: 4/3; }
-    .slate-wrap, .contact-wrap { padding: 60px 24px 80px; }
+    .slate-wrap, .contact-wrap { padding: 40px 24px 60px; }
+    .section-label { margin-bottom: 20px; }
+    .contact-wrap p { margin-bottom: 32px; }
+
+    .home {
+      height: auto;
+      min-height: auto;
+      padding: 80px 1rem 60px;
+    }
+    .home-wordmark {
+      font-size: 24px;
+      letter-spacing: 0.12em;
+      padding-right: 0.12em;
+    }
+    .home-subtitle {
+      font-size: 11px;
+      letter-spacing: 0.6em;
+      padding-right: 0.6em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home { padding: 72px 1rem 48px; }
+    .home-wordmark {
+      font-size: 20px;
+      letter-spacing: 0.08em;
+      padding-right: 0.08em;
+      white-space: normal;
+    }
+    .home-subtitle {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      padding-right: 0.4em;
+    }
+    .about-wrap, .slate-wrap, .contact-wrap {
+      padding: 32px 20px 48px;
+    }
+    .section-label { margin-bottom: 16px; }
+    .nav-overlay-link { font-size: 20px; }
+
+    footer {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    footer span { white-space: nowrap; }
   }
 
   @keyframes fadeUp {
@@ -648,7 +748,6 @@ function ContactPage() {
               <span className="form-label">Or email directly</span>
               <a className="form-email-link" href="mailto:shovelingrock@gmail.com">shovelingrock@gmail.com</a>
             </div>
-            <div className="form-based">Los Angeles · Paris</div>
           </div>
         )}
       </div>
@@ -658,13 +757,20 @@ function ContactPage() {
 
 export default function App() {
   const [page, setPage] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => { window.scrollTo(0, 0); }, [page]);
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const go = (p) => { setPage(p); setMenuOpen(false); };
 
   return (
     <>
       <style>{CSS}</style>
       <nav>
-        <div className="nav-name" onClick={() => setPage("home")}>
+        <div className="nav-name" onClick={() => go("home")}>
           Shoveling Rock
         </div>
         <div className="nav-links">
@@ -678,7 +784,44 @@ export default function App() {
             </button>
           ))}
         </div>
+        <button
+          className="nav-hamburger"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+            <line x1="3" y1="7" x2="21" y2="7" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="17" x2="21" y2="17" />
+          </svg>
+        </button>
       </nav>
+
+      {menuOpen && (
+        <div className="nav-overlay">
+          <button
+            className="nav-overlay-close"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+              <line x1="6" y1="6" x2="18" y2="18" />
+              <line x1="6" y1="18" x2="18" y2="6" />
+            </svg>
+          </button>
+          <div className="nav-overlay-links">
+            {["about", "slate", "contact"].map((p) => (
+              <button
+                key={p}
+                className={`nav-overlay-link ${page === p ? "active" : ""}`}
+                onClick={() => go(p)}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {page === "home"    && <HomePage />}
       {page === "about"   && <AboutPage />}
