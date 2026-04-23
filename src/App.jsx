@@ -6,7 +6,7 @@ const FAULHORN = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1B
 
 
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;800&family=Red+Hat+Text:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14,16 +14,16 @@ const CSS = `
     --ink: #16140f;
     --warm: #9a8878;
     --rule: rgba(22,20,15,0.1);
-    --serif: 'Cormorant Garamond', Georgia, serif;
-    --sans: 'Jost', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
   body {
     background: #f4f0eb;
     color: var(--ink);
-    font-family: var(--sans);
-    font-weight: 300;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
@@ -38,18 +38,23 @@ const CSS = `
     border-bottom: 1px solid var(--rule);
   }
   .nav-name {
-    font-family: var(--serif);
-    font-size: 15px; font-weight: 600;
-    letter-spacing: 0.08em;
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
     cursor: pointer;
   }
   .nav-links { display: flex; gap: 40px; }
   .nav-link {
-    font-size: 10px; letter-spacing: 0.22em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: rgba(22,20,15,0.45);
     background: none; border: none;
-    font-family: var(--sans); font-weight: 500;
     cursor: pointer; transition: color 0.2s;
   }
   .nav-link:hover, .nav-link.active { color: var(--ink); }
@@ -71,20 +76,36 @@ const CSS = `
     animation: fadeUp 1s ease both;
   }
   .home-logo-img {
-    height: 440px;
-    width: auto;
+    width: 100%;
+    max-width: 580px;
+    height: auto;
     display: block;
-    object-fit: contain;
+    margin: 0 auto;
   }
   .home-wordmark {
-    font-family: var(--serif);
-    font-size: 24px;
-    font-weight: 500;
-    letter-spacing: 0.35em;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: 0.16em;
+    padding-right: 0.16em;
     text-transform: uppercase;
-    text-indent: 0.35em;
+    text-align: center;
+    white-space: nowrap;
     color: var(--ink);
     margin-top: 32px;
+  }
+  .home-subtitle {
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 1.08em;
+    padding-right: 1.08em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 0.75rem;
+    color: inherit;
   }
 
   /* ── ABOUT ── */
@@ -107,25 +128,30 @@ const CSS = `
   }
   .about-photo-caption {
     margin-top: 14px;
-    font-size: 10px;
-    letter-spacing: 0.16em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
     color: var(--warm);
   }
   .about-text-col {}
   .section-label {
-    font-size: 9px; letter-spacing: 0.28em;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 800;
+    font-size: 12px; letter-spacing: 0.24em;
     text-transform: uppercase; color: var(--warm);
     margin-bottom: 28px; display: block;
   }
   .about-bio p {
-    font-family: var(--serif);
-    font-size: 19px; line-height: 1.78;
-    font-weight: 300; color: var(--ink);
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 15px; line-height: 1.75;
+    font-weight: 400; color: var(--ink);
     margin-bottom: 22px;
   }
   .about-bio em {
     font-style: italic;
+    font-weight: 500;
   }
   .about-bio strong {
     font-weight: 500;
@@ -137,12 +163,12 @@ const CSS = `
     padding: 80px 48px 120px;
   }
   .slate-intro {
-    font-family: var(--serif);
-    font-size: 17px; line-height: 1.7;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 15px; line-height: 1.75;
     color: rgba(22,20,15,0.55);
     max-width: 520px;
     margin-bottom: 60px;
-    font-weight: 300;
+    font-weight: 400;
   }
   .project {
     border-top: 1px solid var(--rule);
@@ -156,34 +182,40 @@ const CSS = `
     margin-bottom: 6px;
   }
   .project-title {
-    font-family: var(--serif);
-    font-size: 28px; font-weight: 400;
-    letter-spacing: -0.01em;
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: 24px; font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     transition: color 0.2s;
   }
   .project:hover .project-title { color: var(--warm); }
   .project-status {
-    font-size: 8px; letter-spacing: 0.2em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase;
     padding: 3px 9px; border-radius: 2px;
     white-space: nowrap; flex-shrink: 0;
-    font-weight: 400;
   }
   .project-meta {
-    font-size: 10px; letter-spacing: 0.16em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase; color: var(--warm);
     margin-bottom: 14px;
   }
   .project-logline {
-    font-family: var(--serif);
-    font-size: 16px; line-height: 1.65;
-    color: rgba(22,20,15,0.7); font-weight: 300;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 15px; line-height: 1.75;
+    color: rgba(22,20,15,0.7); font-weight: 400;
     max-width: 640px;
   }
   .project-detail {
     margin-top: 0; max-height: 0; overflow: hidden;
     opacity: 0; transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
-    font-size: 11px; letter-spacing: 0.04em; line-height: 1.7;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 400;
+    font-size: 15px; line-height: 1.75;
     color: rgba(22,20,15,0.45);
   }
   .project-detail.open {
@@ -196,19 +228,23 @@ const CSS = `
     padding: 80px 48px 120px;
   }
   .contact-wrap p {
-    font-family: var(--serif);
-    font-size: 19px; line-height: 1.7;
-    color: rgba(22,20,15,0.6); font-weight: 300;
+    font-family: 'Red Hat Text', sans-serif;
+    font-size: 15px; line-height: 1.75;
+    color: rgba(22,20,15,0.6); font-weight: 400;
     margin-bottom: 56px;
   }
   .contact-items { display: flex; flex-direction: column; gap: 28px; }
   .contact-item-label {
-    font-size: 9px; letter-spacing: 0.26em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase; color: var(--warm);
     margin-bottom: 6px;
   }
   .contact-item-value {
-    font-family: var(--serif); font-size: 18px;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 400;
+    font-size: 15px; line-height: 1.75;
     color: var(--ink);
   }
   .contact-item-value a {
@@ -223,7 +259,9 @@ const CSS = `
     border-top: 1px solid var(--rule);
     padding: 24px 48px;
     display: flex; justify-content: space-between;
-    font-size: 9px; letter-spacing: 0.18em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase;
     color: rgba(22,20,15,0.3);
   }
@@ -234,12 +272,14 @@ const CSS = `
   .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .form-field { display: flex; flex-direction: column; gap: 6px; }
   .form-label {
-    font-size: 9px; letter-spacing: 0.24em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase; color: var(--warm);
   }
   .form-input {
-    font-family: var(--sans); font-weight: 300;
-    font-size: 14px; color: var(--ink);
+    font-family: 'Red Hat Text', sans-serif; font-weight: 400;
+    font-size: 15px; color: var(--ink);
     background: rgba(22,20,15,0.04);
     border: 1px solid rgba(22,20,15,0.12);
     border-radius: 2px;
@@ -250,11 +290,11 @@ const CSS = `
   }
   .form-input:focus { border-color: rgba(22,20,15,0.35); }
   .form-input::placeholder { color: rgba(22,20,15,0.3); }
-  .form-textarea { font-family: var(--sans); }
+  .form-textarea { font-family: 'Red Hat Text', sans-serif; }
   .form-submit {
     align-self: flex-start;
-    font-family: var(--sans); font-weight: 400;
-    font-size: 10px; letter-spacing: 0.24em;
+    font-family: 'Red Hat Text', sans-serif; font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase;
     background: var(--ink); color: #f4f0eb;
     border: none; padding: 13px 28px;
@@ -263,15 +303,16 @@ const CSS = `
   .form-submit:hover { opacity: 0.75; }
   .form-submit:disabled { opacity: 0.4; cursor: default; }
   .form-error {
-    font-size: 11px; color: #a04040;
-    letter-spacing: 0.04em;
+    font-size: 13px; color: #a04040;
   }
   .form-email-bottom {
     display: flex; flex-direction: column; gap: 5px;
     padding-top: 4px;
   }
   .form-email-link {
-    font-family: var(--serif); font-size: 16px;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 400;
+    font-size: 15px; line-height: 1.75;
     color: var(--ink); text-decoration: none;
     border-bottom: 1px solid rgba(22,20,15,0.18);
     align-self: flex-start;
@@ -279,17 +320,22 @@ const CSS = `
   }
   .form-email-link:hover { border-color: var(--ink); }
   .form-based {
-    font-size: 9px; letter-spacing: 0.2em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
     text-transform: uppercase; color: rgba(22,20,15,0.25);
     padding-top: 8px;
   }
   .form-sent { padding: 40px 0; }
   .form-sent-title {
-    font-family: var(--serif); font-size: 26px;
-    font-weight: 300; margin-bottom: 8px;
+    font-family: 'Red Hat Text', sans-serif; font-size: 22px;
+    font-weight: 500; margin-bottom: 8px;
   }
   .form-sent-sub {
-    font-size: 12px; letter-spacing: 0.12em;
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 11px; letter-spacing: 0.20em;
+    text-transform: uppercase;
     color: var(--warm);
   }
   @media (max-width: 600px) {
@@ -324,7 +370,6 @@ const CSS = `
     .about-wrap { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px 80px; }
     .about-photo { aspect-ratio: 4/3; }
     .slate-wrap, .contact-wrap { padding: 60px 24px 80px; }
-    .home-logo-img { height: 300px; }
   }
 
   @keyframes fadeUp {
@@ -414,6 +459,7 @@ function HomePage() {
       <div className="home-logo-wrap">
         <img className="home-logo-img" src={LOGO} alt="Chip Signore's son — Faulhorn summit, Swiss Alps" />
         <div className="home-wordmark">Shoveling Rock</div>
+        <div className="home-subtitle">ENTERTAINMENT</div>
       </div>
     </div>
   );
