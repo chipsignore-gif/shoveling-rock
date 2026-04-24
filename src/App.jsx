@@ -26,11 +26,6 @@ const CSS = `
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
-  body.home-page {
-    overflow: hidden;
-    height: 100vh;
-    height: 100dvh;
-  }
 
   /* PAGES */
   .page { padding-top: 160px; }
@@ -45,16 +40,25 @@ const CSS = `
 
   /* ── HOME ── */
   .home {
-    height: 100vh;
-    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: clamp(160px, calc(80px + 20vh), 400px);
+    padding-top: 184px;
     position: relative;
-    overflow: hidden;
-    overscroll-behavior: none;
+  }
+  @media (pointer: coarse) {
+    body.home-page {
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
+    }
+    .home {
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
   }
   .home-logo-wrap {
     display: flex;
@@ -407,9 +411,7 @@ const CSS = `
     background: currentColor;
   }
 
-  @media (max-width: 768px) {
-    .page { padding-top: 140px; }
-
+  @media (max-width: 640px) and (pointer: coarse) {
     .site-nav-wordmark {
       font-size: 14px;
       padding: max(36px, env(safe-area-inset-top)) 18px 14px;
@@ -436,6 +438,7 @@ const CSS = `
     .home {
       padding-left: 1rem;
       padding-right: 1rem;
+      padding-top: 184px;
     }
     .home-wordmark {
       font-size: 32px;
@@ -445,14 +448,14 @@ const CSS = `
     }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 480px) and (pointer: coarse) {
     .site-nav-wordmark { font-size: 13px; }
     .site-nav-tab { font-size: 9px; }
     .home {
       padding-left: 1rem;
       padding-right: 1rem;
       padding-top: 140px;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .home-wordmark {
       font-size: 24px;
@@ -600,7 +603,7 @@ function AboutPage() {
             international perspective.
           </p>
           <p>
-            Current films in development are set in Bangkok, France,
+            Current films in development are set in Thailand, France,
             Switzerland, Italy, and China.
           </p>
         </div>
