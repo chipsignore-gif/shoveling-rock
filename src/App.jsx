@@ -28,39 +28,15 @@ const CSS = `
     min-height: 100vh;
   }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 48px; height: 56px;
-    background: rgba(244,240,235,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .nav-name {
-    font-family: 'Red Hat Display', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-  .nav-links { display: flex; gap: 40px; }
-  .nav-link {
-    font-family: 'Red Hat Text', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(22,20,15,0.45);
-    background: none; border: none;
-    cursor: pointer; transition: color 0.2s;
-  }
-  .nav-link:hover, .nav-link.active { color: var(--ink); }
-
   /* PAGES */
-  .page { min-height: 100vh; padding-top: 56px; }
+  .page { min-height: 100vh; padding-top: 160px; }
+  .page-banner {
+    width: 100%;
+    height: 110px;
+    background: url('/header-banner.jpg') center / cover no-repeat;
+    border-bottom: 0.5px solid rgba(26, 26, 26, 0.1);
+    margin-bottom: 32px;
+  }
 
   /* ── HOME ── */
   .home {
@@ -85,7 +61,7 @@ const CSS = `
   .home-wordmark {
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 800;
-    font-size: 40px;
+    font-size: 48px;
     line-height: 1;
     letter-spacing: 0.16em;
     padding-right: 0.16em;
@@ -98,7 +74,7 @@ const CSS = `
   .home-subtitle {
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1;
     letter-spacing: 1.08em;
     padding-right: 1.08em;
@@ -107,35 +83,38 @@ const CSS = `
     margin-top: 0.75rem;
     color: inherit;
   }
+  .home-colophon {
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    padding-right: 0.24em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 0.5rem;
+    color: rgba(22, 20, 15, 0.45);
+  }
 
   /* ── ABOUT ── */
   .about-wrap {
-    max-width: 1080px; margin: 0 auto;
-    padding: 80px 48px 120px;
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 80px;
-    align-items: start;
+    max-width: 860px; margin: 0 auto;
+    padding: 40px 48px 120px;
   }
-  .about-photo-col {}
-  .about-photo {
-    width: 100%;
-    aspect-ratio: 3/4;
+  .about-founder::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  .about-founder-photo {
+    float: left;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
-    object-position: center top;
+    border-radius: 4px;
+    margin: 0 24px 16px 0;
     display: block;
     filter: saturate(0.88) contrast(1.02);
   }
-  .about-photo-caption {
-    margin-top: 14px;
-    font-family: 'Red Hat Text', sans-serif;
-    font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: var(--warm);
-  }
-  .about-text-col {}
   .section-label {
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 800;
@@ -156,11 +135,21 @@ const CSS = `
   .about-bio strong {
     font-weight: 500;
   }
+  .about-heading {
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+  .about-heading.about-heading--founder { margin-top: 64px; }
 
   /* ── SLATE ── */
   .slate-wrap {
     max-width: 860px; margin: 0 auto;
-    padding: 80px 48px 120px;
+    padding: 40px 48px 120px;
   }
   .slate-intro {
     font-family: 'Red Hat Text', sans-serif;
@@ -225,7 +214,7 @@ const CSS = `
   /* ── CONTACT ── */
   .contact-wrap {
     max-width: 580px; margin: 0 auto;
-    padding: 80px 48px 120px;
+    padding: 40px 48px 120px;
   }
   .contact-wrap p {
     font-family: 'Red Hat Text', sans-serif;
@@ -363,10 +352,8 @@ const CSS = `
     color: var(--warm);
   }
 
-  /* MOBILE */
-  /* ── TOP MOBILE NAV (mobile only) — wordmark row + tab row ── */
-  .mobile-nav {
-    display: none;
+  /* ── SITE NAV (wordmark row + tab row) — all widths ── */
+  .site-nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
@@ -374,41 +361,41 @@ const CSS = `
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
-  .mobile-nav-wordmark {
+  .site-nav-wordmark {
     text-align: center;
     font-family: 'Red Hat Display', sans-serif;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 18px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink);
-    padding: max(36px, env(safe-area-inset-top)) 18px 14px;
+    padding: 40px 24px 16px;
     cursor: pointer;
   }
-  .mobile-nav-tabs {
+  .site-nav-tabs {
     display: flex;
-    justify-content: space-around;
-    padding: 8px 12px 10px;
+    justify-content: center;
+    gap: 56px;
+    padding: 0 24px;
     border-top: 0.5px solid rgba(26, 26, 26, 0.08);
     border-bottom: 0.5px solid rgba(26, 26, 26, 0.08);
   }
-  .mobile-nav-tab {
+  .site-nav-tab {
     background: none;
     border: none;
     font-family: 'Red Hat Text', sans-serif;
     font-weight: 600;
-    font-size: 9px;
-    letter-spacing: 0.22em;
+    font-size: 12px;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--ink);
-    padding: 6px 4px;
+    padding: 10px 8px;
     min-height: 44px;
     cursor: pointer;
     position: relative;
-    flex: 1;
   }
-  .mobile-nav-tab.active { font-weight: 700; }
-  .mobile-nav-tab.active::after {
+  .site-nav-tab.active { font-weight: 700; }
+  .site-nav-tab.active::after {
     content: '';
     position: absolute;
     left: 15%;
@@ -419,12 +406,26 @@ const CSS = `
   }
 
   @media (max-width: 768px) {
-    nav { display: none; }
-    .mobile-nav { display: block; }
     .page { padding-top: 140px; }
 
-    .about-wrap { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 60px; }
-    .about-photo { aspect-ratio: 4/3; }
+    .site-nav-wordmark {
+      font-size: 14px;
+      padding: max(36px, env(safe-area-inset-top)) 18px 14px;
+    }
+    .site-nav-tabs {
+      justify-content: space-around;
+      gap: 0;
+      padding: 8px 12px 10px;
+    }
+    .site-nav-tab {
+      font-size: 10px;
+      flex: 1;
+    }
+
+    .page-banner { height: 90px; }
+    .about-wrap { padding: 40px 24px 60px; }
+    .about-heading { font-size: 18px; }
+    .about-heading.about-heading--founder { margin-top: 40px; }
     .slate-wrap, .contact-wrap { padding: 40px 24px 60px; }
     .section-label { margin-bottom: 20px; }
     .contact-wrap p { margin-bottom: 32px; }
@@ -435,34 +436,36 @@ const CSS = `
       padding: 140px 1rem 60px;
     }
     .home-wordmark {
-      font-size: 24px;
-      letter-spacing: 0.12em;
-      padding-right: 0.12em;
+      font-size: 32px;
     }
     .home-subtitle {
-      font-size: 11px;
-      letter-spacing: 0.6em;
-      padding-right: 0.6em;
+      font-size: 12px;
     }
   }
 
   @media (max-width: 480px) {
+    .site-nav-wordmark { font-size: 13px; }
+    .site-nav-tab { font-size: 9px; }
     .home { padding: 140px 1rem 48px; }
     .home-wordmark {
-      font-size: 20px;
-      letter-spacing: 0.08em;
-      padding-right: 0.08em;
+      font-size: 24px;
       white-space: normal;
     }
     .home-subtitle {
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      padding-right: 0.4em;
+      font-size: 11px;
     }
+    .page-banner { height: 70px; }
     .about-wrap, .slate-wrap, .contact-wrap {
       padding: 32px 20px 48px;
     }
     .section-label { margin-bottom: 16px; }
+    .about-founder-photo {
+      float: none;
+      display: block;
+      margin: 0 auto 20px;
+      width: 160px;
+      height: 160px;
+    }
 
     footer {
       flex-direction: column;
@@ -562,6 +565,7 @@ function HomePage() {
         <img className="home-logo-img" src={LOGO} alt="Chip Signore's son — Faulhorn summit, Swiss Alps" />
         <div className="home-wordmark">Shoveling Rock</div>
         <div className="home-subtitle">ENTERTAINMENT</div>
+        <div className="home-colophon">Los Angeles &nbsp;·&nbsp; Paris</div>
       </div>
     </div>
   );
@@ -572,12 +576,20 @@ function AboutPage() {
     <>
     <div className="page">
       <div className="about-wrap">
-        <div className="about-photo-col">
-          <img className="about-photo" src={PHOTO} alt="Chip Signore" />
-          <div className="about-photo-caption">Huangshan, China · 2026</div>
+        <div className="page-banner" />
+        <h2 className="about-heading">Shoveling Rock</h2>
+        <div className="about-bio">
+          <p>
+            Shoveling Rock is an independent production company developing
+            feature films and limited series with an international
+            perspective.
+          </p>
         </div>
-        <div className="about-text-col">
-          <span className="section-label">About</span>
+        <h2 className="about-heading about-heading--founder">
+          Chip Signore, Founder
+        </h2>
+        <div className="about-founder">
+          <img className="about-founder-photo" src={PHOTO} alt="Chip Signore" />
           <div className="about-bio">
             <p>
               Chip Signore is a Producer and DGA First Assistant Director with
@@ -587,16 +599,15 @@ function AboutPage() {
             </p>
             <p>
               He has been fortunate to collaborate with filmmakers of real
-              consequence. <em>Precious</em> won two Academy Awards.
-              <em>The Savages</em>, <em>American Splendor</em>, and
+              consequence. <em>Precious</em> won two Academy Awards.{" "}
+              <em>The Savages</em>, <em>American Splendor</em>, and{" "}
               <em>Junebug</em> were Oscar-nominated. <em>Watchmen</em> won
-              eleven Emmys; <em>Cinema Verite</em> was nominated for nine;
-              <em>The Marvelous Mrs. Maisel</em> for fourteen.
-              <em>Chappelle's Show</em> and <em>Wet Hot American Summer</em>
+              eleven Emmys; <em>Cinema Verite</em> was nominated for nine;{" "}
+              <em>The Marvelous Mrs. Maisel</em> for fourteen.{" "}
+              <em>Chappelle's Show</em> and <em>Wet Hot American Summer</em>{" "}
               helped define a generation of American comedy. Eleven of his
               films have premiered at Sundance, four of them prize winners.
             </p>
-
             <p>
               Work in Mexico City, Budapest, and Bangkok has pulled him toward
               international projects. Shoveling Rock is a production company
@@ -622,6 +633,7 @@ function SlatePage() {
   return (
     <div className="page">
       <div className="slate-wrap">
+        <div className="page-banner" />
         <span className="section-label">Current Projects</span>
         <div className="project-list">
           {PROJECTS.map((p) => (
@@ -685,6 +697,7 @@ function ContactPage() {
   return (
     <div className="page">
       <div className="contact-wrap">
+        <div className="page-banner" />
         <span className="section-label">Contact</span>
         <p>
           Shoveling Rock is open to co-production conversations, financing
@@ -764,32 +777,15 @@ export default function App() {
   return (
     <>
       <style>{CSS}</style>
-      <nav>
-        <div className="nav-name" onClick={() => setPage("home")}>
+      <div className="site-nav">
+        <div className="site-nav-wordmark" onClick={() => setPage("home")}>
           Shoveling Rock
         </div>
-        <div className="nav-links">
-          {["about", "slate", "contact"].map((p) => (
-            <button
-              key={p}
-              className={`nav-link ${page === p ? "active" : ""}`}
-              onClick={() => setPage(p)}
-            >
-              {p}
-            </button>
-          ))}
-        </div>
-      </nav>
-
-      <div className="mobile-nav">
-        <div className="mobile-nav-wordmark" onClick={() => setPage("home")}>
-          Shoveling Rock
-        </div>
-        <div className="mobile-nav-tabs">
+        <div className="site-nav-tabs">
           {["home", "about", "slate", "contact"].map((p) => (
             <button
               key={p}
-              className={`mobile-nav-tab ${page === p ? "active" : ""}`}
+              className={`site-nav-tab ${page === p ? "active" : ""}`}
               onClick={() => setPage(p)}
             >
               {p}
