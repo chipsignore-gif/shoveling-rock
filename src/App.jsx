@@ -561,8 +561,8 @@ function AboutPage() {
         <div className="about-bio">
           <p>
             Shoveling Rock is an independent production company developing
-            feature films and limited series with an international
-            perspective.
+            and producing feature films and limited series with an
+            international perspective.
           </p>
         </div>
         <h2 className="about-heading about-heading--founder">
