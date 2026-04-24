@@ -31,10 +31,11 @@ const CSS = `
   .page { min-height: 100vh; padding-top: 160px; }
   .page-banner {
     width: 100%;
+    max-width: 680px;
+    margin: 0 auto 32px;
     height: 110px;
     background: url('/header-banner.jpg') center / cover no-repeat;
     border-bottom: 0.5px solid rgba(26, 26, 26, 0.1);
-    margin-bottom: 32px;
   }
 
   /* ── HOME ── */
@@ -96,7 +97,7 @@ const CSS = `
 
   /* ── ABOUT ── */
   .about-wrap {
-    max-width: 860px; margin: 0 auto;
+    max-width: 680px; margin: 0 auto;
     padding: 40px 48px 120px;
   }
   .about-founder::after {
@@ -147,7 +148,7 @@ const CSS = `
 
   /* ── SLATE ── */
   .slate-wrap {
-    max-width: 860px; margin: 0 auto;
+    max-width: 680px; margin: 0 auto;
     padding: 40px 48px 120px;
   }
   .slate-intro {
@@ -212,7 +213,7 @@ const CSS = `
 
   /* ── CONTACT ── */
   .contact-wrap {
-    max-width: 580px; margin: 0 auto;
+    max-width: 680px; margin: 0 auto;
     padding: 40px 48px 120px;
   }
   .contact-wrap p {
