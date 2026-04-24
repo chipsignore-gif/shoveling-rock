@@ -574,8 +574,7 @@ function AboutPage() {
             <p>
               Chip Signore is a Producer and DGA First Assistant Director with
               thirty years in American film and television. He came up in the
-              New York independent film scene of the nineties and has since
-              built a body of work across feature film and premium television.
+              New York independent film scene of the nineties.
             </p>
             <p>
               He has been fortunate to collaborate with filmmakers of real
