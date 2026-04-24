@@ -26,13 +26,18 @@ const CSS = `
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
+  body.home-page {
+    overflow: hidden;
+    height: 100vh;
+    height: 100dvh;
+  }
 
   /* PAGES */
-  .page { min-height: 100vh; padding-top: 160px; }
+  .page { padding-top: 160px; }
   .page-banner {
     width: 100%;
     max-width: 680px;
-    margin: 0 auto 32px;
+    margin: 0 auto 20px;
     height: 110px;
     background: url('/header-banner.jpg') center / cover no-repeat;
     border-bottom: 0.5px solid rgba(26, 26, 26, 0.1);
@@ -41,8 +46,15 @@ const CSS = `
   /* ── HOME ── */
   .home {
     height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: clamp(160px, calc(80px + 20vh), 400px);
+    position: relative;
+    overflow: hidden;
+    overscroll-behavior: none;
   }
   .home-logo-wrap {
     display: flex;
@@ -54,9 +66,11 @@ const CSS = `
   .home-logo-img {
     width: 100%;
     max-width: 580px;
+    aspect-ratio: 16 / 9;
     height: auto;
     display: block;
     margin: 0 auto;
+    object-fit: cover;
   }
   .home-wordmark {
     font-family: 'Red Hat Display', sans-serif;
@@ -98,7 +112,7 @@ const CSS = `
   /* ── ABOUT ── */
   .about-wrap {
     max-width: 680px; margin: 0 auto;
-    padding: 40px 48px 120px;
+    padding: 16px 48px 8px;
   }
   .about-founder::after {
     content: '';
@@ -126,7 +140,7 @@ const CSS = `
     font-family: 'Red Hat Text', sans-serif;
     font-size: 15px; line-height: 1.75;
     font-weight: 400; color: var(--ink);
-    margin-bottom: 22px;
+    margin-bottom: 16px;
   }
   .about-bio em {
     font-style: italic;
@@ -144,12 +158,21 @@ const CSS = `
     color: var(--ink);
     margin: 0 0 24px;
   }
-  .about-heading.about-heading--founder { margin-top: 64px; }
+  .about-heading.about-heading--founder { margin-top: 16px; }
+  .about-established {
+    font-family: 'Red Hat Text', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-top: 8px;
+  }
 
   /* ── SLATE ── */
   .slate-wrap {
     max-width: 680px; margin: 0 auto;
-    padding: 40px 48px 120px;
+    padding: 16px 48px 120px;
   }
   .slate-intro {
     font-family: 'Red Hat Text', sans-serif;
@@ -214,7 +237,7 @@ const CSS = `
   /* ── CONTACT ── */
   .contact-wrap {
     max-width: 680px; margin: 0 auto;
-    padding: 40px 48px 120px;
+    padding: 16px 48px 8px;
   }
   .contact-wrap p {
     font-family: 'Red Hat Text', sans-serif;
@@ -402,18 +425,17 @@ const CSS = `
     }
 
     .page-banner { height: 90px; }
-    .about-wrap { padding: 40px 24px 60px; }
+    .about-wrap { padding: 16px 24px 8px; }
     .about-heading { font-size: 18px; }
-    .about-heading.about-heading--founder { margin-top: 40px; }
     .about-founder-photo { width: 160px; height: 160px; }
-    .slate-wrap, .contact-wrap { padding: 40px 24px 60px; }
+    .slate-wrap { padding: 16px 24px 60px; }
+    .contact-wrap { padding: 16px 24px 8px; }
     .section-label { margin-bottom: 20px; }
     .contact-wrap p { margin-bottom: 32px; }
 
     .home {
-      height: auto;
-      min-height: auto;
-      padding: 140px 1rem 60px;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     .home-wordmark {
       font-size: 32px;
@@ -426,7 +448,12 @@ const CSS = `
   @media (max-width: 480px) {
     .site-nav-wordmark { font-size: 13px; }
     .site-nav-tab { font-size: 9px; }
-    .home { padding: 140px 1rem 48px; }
+    .home {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 140px;
+      justify-content: center;
+    }
     .home-wordmark {
       font-size: 24px;
       white-space: normal;
@@ -435,10 +462,17 @@ const CSS = `
       font-size: 11px;
     }
     .page-banner { height: 70px; }
-    .about-wrap, .slate-wrap, .contact-wrap {
-      padding: 32px 20px 48px;
+    .about-wrap {
+      padding: 12px 20px 8px;
+    }
+    .slate-wrap {
+      padding: 12px 20px 48px;
+    }
+    .contact-wrap {
+      padding: 12px 20px 8px;
     }
     .section-label { margin-bottom: 16px; }
+    .about-heading.about-heading--founder { margin-top: 12px; }
     .about-founder-photo { width: 120px; height: 120px; }
 
     footer {
@@ -565,6 +599,13 @@ function AboutPage() {
             and producing feature films and limited series with an
             international perspective.
           </p>
+          <p>
+            Current films in development are set in Bangkok, France,
+            Switzerland, Italy, and China.
+          </p>
+        </div>
+        <div className="about-established">
+          Established Los Angeles, 2006. Paris, 2026.
         </div>
         <h2 className="about-heading about-heading--founder">
           Founder
@@ -589,10 +630,7 @@ function AboutPage() {
               films have premiered at Sundance, four of them prize winners.
             </p>
             <p>
-              Work in Mexico City, Budapest, and Bangkok has pulled him toward
-              international projects. Shoveling Rock has films in development
-              in Thailand, Italy, Switzerland, France, and China. He lives
-              between Los Angeles and Paris.
+              He lives between Los Angeles and Paris.
             </p>
           </div>
         </div>
@@ -746,6 +784,10 @@ function ContactPage() {
 export default function App() {
   const [page, setPage] = useState("home");
   useEffect(() => { window.scrollTo(0, 0); }, [page]);
+  useEffect(() => {
+    document.body.classList.toggle("home-page", page === "home");
+    return () => document.body.classList.remove("home-page");
+  }, [page]);
 
   return (
     <>
