@@ -256,7 +256,7 @@ const CSS = `
   footer {
     border-top: 1px solid var(--rule);
     padding: 24px 48px;
-    display: flex; justify-content: space-between;
+    display: flex; justify-content: center;
     font-family: 'Red Hat Text', sans-serif;
     font-weight: 500;
     font-size: 11px; letter-spacing: 0.20em;
@@ -303,20 +303,6 @@ const CSS = `
   .form-error {
     font-size: 13px; color: #a04040;
   }
-  .form-email-bottom {
-    display: flex; flex-direction: column; gap: 5px;
-    padding-top: 4px;
-  }
-  .form-email-link {
-    font-family: 'Red Hat Text', sans-serif;
-    font-weight: 400;
-    font-size: 15px; line-height: 1.75;
-    color: var(--ink); text-decoration: none;
-    border-bottom: 1px solid rgba(22,20,15,0.18);
-    align-self: flex-start;
-    transition: border-color 0.2s;
-  }
-  .form-email-link:hover { border-color: var(--ink); }
   .form-based {
     font-family: 'Red Hat Text', sans-serif;
     font-weight: 500;
@@ -684,7 +670,7 @@ function ContactPage() {
     }
     setStatus("sending");
     try {
-      const res = await fetch("https://formspree.io/f/mwpkqdnp" /* → shovelingrock@gmail.com */, {
+      const res = await fetch("https://formspree.io/f/mwpkqdnp", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
@@ -763,10 +749,6 @@ function ContactPage() {
             >
               {status === "sending" ? "Sending\u2026" : "Send Inquiry"}
             </button>
-            <div className="form-email-bottom">
-              <span className="form-label">Or email directly</span>
-              <a className="form-email-link" href="mailto:shovelingrock@gmail.com">shovelingrock@gmail.com</a>
-            </div>
           </div>
         )}
       </div>
@@ -810,8 +792,7 @@ export default function App() {
 
       {page !== "home" && (
         <footer>
-          <span>© 2025 Shoveling Rock</span>
-          <span>Los Angeles · Paris</span>
+          <span>© 2026 Shoveling Rock</span>
         </footer>
       )}
     </>
